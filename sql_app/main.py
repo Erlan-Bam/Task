@@ -39,8 +39,8 @@ def get_range(page: int = 1, db: Session = Depends(get_db)):
 @app.get("/books/info")
 def get_info(db: Session = Depends(get_db)):
     all_books = crud.get_books(db,skip=0,limit=100)
-    for id, book in enumerate(all_books):
-       print(id, book.title)
+    for book in all_books:
+       print(f'[{book.id}: {book.title}]')
 @app.get("/books/next",response_model=List[schema.Book])
 def next(page: int = 1, db: Session = Depends(get_db)):
     all_books = crud.get_books(db,skip=0,limit=100)
